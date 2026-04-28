@@ -1,7 +1,7 @@
 import streamlit as st
 import torch
-import pickle
 import re
+import json
 import numpy as np
 
 from model import LSTMModel
@@ -16,8 +16,12 @@ def pad_sequences(sequences, maxlen):
     return out
 
 
-with open("tokenizer.pkl", "rb") as f:
-    tokenizer = pickle.load(f)
+with open("tokenizer.json") as f:
+    word_index = json.load(f)["config"]["word_index"]
+
+
+def texts_to_sequences(texts):
+    return [[word_index[w] for w in text.split() if w in word_index] for text in texts]
 
 vocab_size = 5001
 model = LSTMModel(vocab_size)
@@ -35,7 +39,7 @@ def clean_text(text):
 
 def predict_sentiment(text):
     cleaned = clean_text(text)
-    seq = tokenizer.texts_to_sequences([cleaned])
+    seq = texts_to_sequences([cleaned])
     padded = pad_sequences(seq, maxlen=100)
     tensor = torch.tensor(padded, dtype=torch.long)
     with torch.no_grad():

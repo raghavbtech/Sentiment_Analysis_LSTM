@@ -2,9 +2,18 @@ import streamlit as st
 import torch
 import pickle
 import re
-from tensorflow.keras.preprocessing.sequence import pad_sequences
+import numpy as np
 
 from model import LSTMModel
+
+
+def pad_sequences(sequences, maxlen):
+    out = np.zeros((len(sequences), maxlen), dtype="int32")
+    for i, seq in enumerate(sequences):
+        if len(seq) > maxlen:
+            seq = seq[len(seq) - maxlen:]
+        out[i, maxlen - len(seq):] = seq
+    return out
 
 
 with open("tokenizer.pkl", "rb") as f:

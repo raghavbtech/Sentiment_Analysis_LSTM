@@ -17,7 +17,9 @@ def pad_sequences(sequences, maxlen):
 
 
 with open("tokenizer.json") as f:
-    word_index = json.load(f)["config"]["word_index"]
+    raw = json.load(f)
+    wi = raw["config"]["word_index"]
+    word_index = json.loads(wi) if isinstance(wi, str) else wi
 
 
 def texts_to_sequences(texts):

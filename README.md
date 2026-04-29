@@ -1,4 +1,4 @@
-# Reel Feelings — Movie Sentiment Analyzer
+# CineSense — Movie Sentiment Analyzer
 
 A sentiment analysis app for movie reviews, built with an LSTM model trained on the IMDB dataset. Runs as a Streamlit web app.
 

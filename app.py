@@ -50,7 +50,7 @@ def predict_sentiment(text):
     return prob
 
 
-st.set_page_config(page_title="Reel Feelings", page_icon="🎞️", layout="centered")
+st.set_page_config(page_title="CineSense", page_icon="🎞️", layout="centered")
 
 st.markdown("""
 <style>
@@ -231,7 +231,7 @@ st.markdown("""
 
 st.markdown("""
 <div class="header">
-    <h1>Reel Feelings</h1>
+    <h1>CineSense</h1>
     <p>Movie Sentiment Analyzer</p>
 </div>
 """, unsafe_allow_html=True)
